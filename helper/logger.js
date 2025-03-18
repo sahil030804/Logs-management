@@ -19,11 +19,7 @@ const logger = winston.createLogger({
       ({ level, message, timestamp }) => `${timestamp} ${level}: ${message}`
     )
   ),
-  transports: [
-    fileRotateTransport,
-    new winston.transports.Console(),
-    // new winston.transports.File({ filename: "combined.log" }),
-  ],
+  transports: [fileRotateTransport, new winston.transports.Console()],
 });
 
 // fired when a log file is created
