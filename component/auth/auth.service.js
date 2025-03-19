@@ -1,11 +1,11 @@
 const logger = require("../../helper/logger");
+const common = require("../../config/common");
 const loginUser = async (req) => {
   const { email, password } = req.body;
   try {
-    // Mock user data - replace with your database query
     const user = {
-      email: "test@getnada.com",
-      password: "Test@123",
+      email: common.demoUser.email,
+      password: common.demoUser.password,
     };
 
     if (user.email !== email) {
@@ -19,8 +19,9 @@ const loginUser = async (req) => {
       logger.error(`Login failed: Invalid password for user ${email}`);
       throw new Error("INVALID_CREDENTIALS");
     }
-
+    delete user.password;
     logger.info(`User ${email} logged in successfully`);
+
     return { message: "Login successful", user };
   } catch (error) {
     throw new Error(error.message);

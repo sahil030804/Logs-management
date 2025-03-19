@@ -1,7 +1,6 @@
 const express = require("express");
 const errorHandler = require("./middleware/errorHandler");
 const authRouter = require("./component/auth/auth.router");
-// const morgan = require("morgan");
 const morganLogger = require("./middleware/morgan");
 
 const PORT = process.env.PORT || 3000;
