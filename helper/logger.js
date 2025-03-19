@@ -1,22 +1,23 @@
 const winston = require("winston");
+const config = require("../config/config");
 require("winston-daily-rotate-file");
 const { combine, timestamp, json, printf } = winston.format;
 
 const fileRotateTransport = new winston.transports.DailyRotateFile({
-  filename: "logs/combined-%DATE%.log",
-  datePattern: "YYYY-MM-DD",
-  maxSize: "20m",
-  maxFiles: "10d",
-  // zippedArchive: true,
+  filename: config.dailyRotateFile.filename,
+  datePattern: config.dailyRotateFile.datePattern,
+  maxSize: config.dailyRotateFile.maxSize,
+  maxFiles: config.dailyRotateFile.maxFiles,
+  zippedArchive: config.dailyRotateFile.zippedArchive,
 });
 
 const logger = winston.createLogger({
-  level: "silly",
+  level: config.logger.level,
   format: combine(
     timestamp(),
     json(),
     printf(
-      ({ level, message, timestamp }) => `${timestamp} ${level}: ${message}`
+      ({ level, message, timestamp }) => `${timestamp} | ${level}:  ${message}`
     )
   ),
   transports: [fileRotateTransport, new winston.transports.Console()],

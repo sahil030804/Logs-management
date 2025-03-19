@@ -95,7 +95,7 @@ Morgan captures and logs detailed HTTP request and response metadata.
 
 **Error Log:**
 
-```
+```json
 {
   "dt": "2025-03-20T08:36:29.675Z",
   "level": "error",
